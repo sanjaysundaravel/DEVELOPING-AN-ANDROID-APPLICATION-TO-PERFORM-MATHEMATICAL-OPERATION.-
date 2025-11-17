@@ -25,11 +25,176 @@ The platform uses signed two's complement integer arithmetic with int and long p
 
 
 ## PROGRAM:
+package com.example.myapplication3;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    Button buttonAdd, buttonSub, buttonMul, buttonDiv;
+    EditText editTextN1, editTextN2;
+    TextView textView;
+    int num1, num2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        buttonAdd = findViewById(R.id.btn_add);
+        buttonSub = findViewById(R.id.btn_sub);
+        buttonMul = findViewById(R.id.btn_mul);
+        buttonDiv = findViewById(R.id.btn_div);
+        editTextN1 = findViewById(R.id.number1);
+        editTextN2 = findViewById(R.id.number2);
+        textView = findViewById(R.id.answer);
+
+        buttonAdd.setOnClickListener(this);
+        buttonSub.setOnClickListener(this);
+        buttonMul.setOnClickListener(this);
+        buttonDiv.setOnClickListener(this);
+
+    }
+
+    public int getIntFromEditText(EditText editText) {
+        if (editText.getText().toString().equals("")) {
+            Toast.makeText(this, "Enter number", Toast.LENGTH_SHORT).show();
+            return 0;
+        } else
+            return Integer.parseInt(editText.getText().toString());
+    }
+
+    @Override
+    public void onClick(View view) {
+        num1 = getIntFromEditText(editTextN1);
+        num2 = getIntFromEditText(editTextN2);
+
+        int id = view.getId(); // Get the ID once
+
+        if (id == R.id.btn_add) {
+            textView.setText("Answer = " + (num1 + num2));
+        } else if (id == R.id.btn_sub) {
+            textView.setText("Answer = " + (num1 - num2));
+        } else if (id == R.id.btn_mul) {
+            textView.setText("Answer = " + (num1 * num2));
+        } else if (id == R.id.btn_div) {
+            // Ensure num2 is not zero to avoid division by zero error
+            if
+            (num2 == 0) {
+                Toast.makeText(this, "Cannot divide by zero", Toast.LENGTH_SHORT).show();
+                textView.setText("Answer = Error");
+            } else {
+                textView.setText("Answer = " + ((float) num1 / (float) num2));
+            }
+        }
+    }
+}
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Simple calculator!"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:layout_margin="50dp"
+         android:textSize="30sp"/>
+
+    <EditText
+        android:id="@+id/number1"
+        android:hint="Enter number"
+        android:layout_margin="30dp"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/number2"
+        android:hint="Enter number"
+        android:layout_margin="30dp"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_add"
+            android:text="+"
+            android:textSize="30sp"
+            android:layout_marginEnd="5dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_sub"
+            android:text="-"
+            android:textSize="30sp"
+            android:layout_marginEnd="5dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_mul"
+            android:text="*"
+            android:textSize="30sp"
+            android:layout_marginEnd="5dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_div"
+            android:text="/"
+            android:textSize="30dp"
+            android:layout_marginEnd="5dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/answer"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
 
 
 
 ## OUTPUT:
+<img width="1040" height="557" alt="image" src="https://github.com/user-attachments/assets/d1695077-4107-44f2-a74d-bc874abb3d57" />
 
 
 
